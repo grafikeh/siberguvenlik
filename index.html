@@ -176,31 +176,58 @@
         }
 
         .quiz-options button {
+            display: block;
+            width: 100%;
+            text-align: left;
             background: #0f172a;
             color: var(--text);
             border: 1px solid #475569;
-            padding: 0.5rem 1rem;
+            padding: 0.65rem 1rem;
             border-radius: 6px;
             cursor: pointer;
-            margin-right: 0.5rem;
             margin-bottom: 0.5rem;
             transition: 0.2s;
+            font-size: 0.95rem;
         }
 
-        .quiz-options button:hover {
+        .quiz-options button:hover:not(:disabled) {
             border-color: var(--accent);
         }
 
         .quiz-options button.correct {
-            background: var(--success);
-            border-color: var(--success);
-            color: #fff;
+            background: var(--success) !important;
+            border-color: var(--success) !important;
+            color: #fff !important;
         }
 
         .quiz-options button.wrong {
-            background: var(--danger);
-            border-color: var(--danger);
-            color: #fff;
+            background: var(--danger) !important;
+            border-color: var(--danger) !important;
+            color: #fff !important;
+        }
+
+        /* Sağ Tıklama Bildirim Kutusu */
+        #security-alert-box {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 16px 22px;
+            border-radius: 8px;
+            border: 2px solid #38bdf8;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+            font-size: 0.95rem;
+            z-index: 10000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #security-alert-box.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         footer {
@@ -213,6 +240,11 @@
     </style>
 </head>
 <body>
+
+    <!-- Sağ Tık Bildirimi İçin Sabit Kutu -->
+    <div id="security-alert-box">
+        🛡️ <strong>Güvenlik Uyarısı:</strong> Bu sayfanın içerikleri Fuat Sezgin Anadolu Lisesi Siber Güvenlik Projesi kapsamında korunmaktadır.
+    </div>
 
     <nav>
         <div class="logo">SiberKalkan 🛡️</div>
@@ -283,6 +315,7 @@
                     <button onclick="answer(this, true)">Fu@tS3zg!nAL</button>
                 </div>
             </div>
+
             <div class="quiz-question" id="q3">
                 <p>3. "Adınız terör örgütü şüphelileri arasında geçiyor. Listeden adınızın silinmesi için linke tıklayıp kredi kartı bilgilerinizi giriniz." diye bir SMS aldığınızda ne yaparsınız?</p>
                 <div class="quiz-options">
@@ -299,6 +332,7 @@
     </footer>
 
     <script>
+        // Şifre Gücü Ölçer Fonksiyonu
         function checkPasswordStrength() {
             const password = document.getElementById('passwordInput').value;
             const bar = document.getElementById('meterBar');
@@ -334,20 +368,36 @@
             }
         }
 
+        // Test Cevap Fonksiyonu (Yanlış seçilince kırmızı yanar, diğerleri açık kalır; doğru seçilince kırmızılar söner ve kilitlenir)
         function answer(button, isCorrect) {
             const parent = button.parentElement;
             const buttons = parent.querySelectorAll('button');
-            buttons.forEach(b => {
-                b.disabled = true;
-                b.classList.remove('correct', 'wrong');
-            });
 
             if (isCorrect) {
+                buttons.forEach(b => {
+                    b.classList.remove('wrong');
+                    b.disabled = true;
+                });
                 button.classList.add('correct');
             } else {
                 button.classList.add('wrong');
+                button.disabled = true;
             }
         }
+
+        // Sağ Tıklama Mesajını Aktif Eden Kod
+        let hideTimeout;
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault(); // Sağ tık menüsünü engelle
+
+            const alertBox = document.getElementById('security-alert-box');
+            alertBox.classList.add('show');
+
+            clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                alertBox.classList.remove('show');
+            }, 3000);
+        });
     </script>
 </body>
 </html>
