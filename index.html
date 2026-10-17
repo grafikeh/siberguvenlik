@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genç Siber Güvenlik Rehberi</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        nav {
+            background: rgba(30, 41, 59, 0.95);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1.5rem 2rem;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        header p {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 0.75rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid #334155;
+        }
+
+        .card h3 {
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Araç Alanları */
+        .tool-box {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+        }
+
+        .meter-container {
+            height: 10px;
+            background: #334155;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 0.75rem;
+        }
+
+        .meter-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .meter-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Test Bölümü */
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-question p {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-options button {
+            background: #0f172a;
+            color: var(--text);
+            border: 1px solid #475569;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: 0.2s;
+        }
+
+        .quiz-options button:hover {
+            border-color: var(--accent);
+        }
+
+        .quiz-options button.correct {
+            background: var(--success);
+            border-color: var(--success);
+            color: #fff;
+        }
+
+        .quiz-options button.wrong {
+            background: var(--danger);
+            border-color: var(--danger);
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SiberKalkan 🛡️</div>
+        <ul>
+            <li><a href="#bilgiler">Bilgiler</a></li>
+            <li><a href="#sifre-olcer">Şifre Testi</a></li>
+            <li><a href="#guvenlik-testi">Bilgi Testi</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>İnternette Güvende Kalın</h1>
+        <p>Dijital dünyada kişisel verilerinizi koruyun, tuzaklara düşmeyin ve şifrelerinizi güçlendirin.</p>
+    </header>
+
+    <div class="container">
+        <!-- Bilgilendirici Kartlar -->
+        <h2 class="section-title" id="bilgiler">Temel Güvenlik Konuları</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>🎣 Oltalama (Phishing)</h3>
+                <p>Güvenilir bir kurumdan geliyor gibi görünen sahte e-postalar veya mesajlarla şifrelerinizin çalınmasıdır. Şüpheli linklere tıklamayın ve URL adresini mutlaka kontrol edin.</p>
+            </div>
+            <div class="card">
+                <h3>🔑 Güçlü Şifreler</h3>
+                <p>Doğum tarihi veya ardışık sayılar yerine; büyük-küçük harf, rakam ve semboller içeren en az 10-12 karakterli karmaşık parolalar tercih edin.</p>
+            </div>
+            <div class="card">
+                <h3>📱 Sosyal Medya Güvenliği</h3>
+                <p>Konumunuzu anlık paylaşmayın, yabancılardan gelen arkadaşlık isteklerini kabul etmeyin ve profilinizi mümkünse gizli hesapta tutun.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ Kişisel Bilgi Korunması</h3>
+                <p>TC kimlik numarası, ev adresi ve telefon gibi hassas verileri halka açık forumlarda veya güvenilmeyen formlarda paylaşmayın.</p>
+            </div>
+        </div>
+
+        <!-- Etkileşimli Şifre Ölçer -->
+        <h2 class="section-title" id="sifre-olcer">Şifre Güvenlik Ölçer</h2>
+        <div class="tool-box">
+            <p style="margin-bottom: 1rem; color: var(--text-muted);">Öğrenmek istediğiniz bir şifre kombinasyonu girin (Veriler hiçbir yere kaydedilmez):</p>
+            <div class="input-group">
+                <input type="text" id="passwordInput" placeholder="Örnek şifre yazın..." oninput="checkPasswordStrength()">
+                <div class="meter-container">
+                    <div class="meter-bar" id="meterBar"></div>
+                </div>
+                <div class="meter-text" id="meterText">Şifre giriniz</div>
+            </div>
+        </div>
+
+        <!-- Mini Bilgi Testi -->
+        <h2 class="section-title" id="guvenlik-testi">Hızlı Güvenlik Sınavı</h2>
+        <div class="tool-box">
+            <div class="quiz-question" id="q1">
+                <p>1. Bir mesajda "Hesabınız askıya alındı, hemen bu bağlantıya tıklayıp şifrenizi girin" yazıyorsa ne yapmalısınız?</p>
+                <div class="quiz-options">
+                    <button onclick="answer(this, false)">Hemen linke tıklarım</button>
+                    <button onclick="answer(this, true)">Mesajı silerim veya göndereni kontrol ederim</button>
+                    <button onclick="answer(this, false)">Şifremi arkadaşımla paylaşıp sorarım</button>
+                </div>
+            </div>
+
+            <div class="quiz-question" id="q2">
+                <p>2. Aşağıdakilerden hangisi en güvenli şifre örneğidir?</p>
+                <div class="quiz-options">
+                    <button onclick="answer(this, false)">12345678</button>
+                    <button onclick="answer(this, false)">ahmet2010</button>
+                    <button onclick="answer(this, true)">K@p1_K1l1t!89</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Lise Siber Güvenlik Bilinçlendirme Projesi Ödevi</p>
+    </footer>
+
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById('passwordInput').value;
+            const bar = document.getElementById('meterBar');
+            const text = document.getElementById('meterText');
+
+            let score = 0;
+
+            if (password.length >= 8) score++;
+            if (password.length >= 12) score++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^a-zA-Z0-9]/.test(password)) score++;
+
+            if (password.length === 0) {
+                bar.style.width = '0%';
+                text.innerText = 'Şifre giriniz';
+                text.style.color = 'var(--text-muted)';
+            } else if (score <= 2) {
+                bar.style.width = '30%';
+                bar.style.backgroundColor = 'var(--danger)';
+                text.innerText = 'Zayıf Şifre';
+                text.style.color = 'var(--danger)';
+            } else if (score <= 4) {
+                bar.style.width = '65%';
+                bar.style.backgroundColor = 'var(--warning)';
+                text.innerText = 'Orta Güçlükte Şifre';
+                text.style.color = 'var(--warning)';
+            } else {
+                bar.style.width = '100%';
+                bar.style.backgroundColor = 'var(--success)';
+                text.innerText = 'Çok Güçlü Şifre';
+                text.style.color = 'var(--success)';
+            }
+        }
+
+        function answer(button, isCorrect) {
+            const parent = button.parentElement;
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('correct', 'wrong');
+            });
+
+            if (isCorrect) {
+                button.classList.add('correct');
+            } else {
+                button.classList.add('wrong');
+            }
+        }
+    </script>
+</body>
+</html>
